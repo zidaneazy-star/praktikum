@@ -1,18 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MatakuliahController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Halaman daftar semua mata kuliah
+Route::get('/matakuliah', [MatakuliahController::class, 'index'])
+     ->name('matakuliah.index');
 
-use App\Http\Controllers\ProdukController;
+// Form tambah data
+Route::get('/matakuliah/create', [MatakuliahController::class, 'create'])
+     ->name('matakuliah.create');
 
-Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
-Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
+// Proses simpan data
+Route::post('/matakuliah', [MatakuliahController::class, 'store'])
+     ->name('matakuliah.store');
 
-use App\Http\Controllers\MahasiswaController;
-
-Route::get('/profil', [MahasiswaController::class, 'profil'])->name('mahasiswa.profil');
-Route::get('/mahasiswa', [MahasiswaController::class, 'daftar'])->name('mahasiswa.daftar');
-Route::get('/mahasiswa/{nim}', [MahasiswaController::class, 'detail'])->name('mahasiswa.detail');
+// Halaman detail berdasarkan ID
+Route::get('/matakuliah/{id}', [MatakuliahController::class, 'show'])
+     ->name('matakuliah.show');
